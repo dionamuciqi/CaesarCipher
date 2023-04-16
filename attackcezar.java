@@ -30,3 +30,28 @@ public static String Dekriptimi(String ciphertext) {
     String[] Split_Mesazhi = ciphertext.split(" ");
 
     List<String> list = new ArrayList<String>();
+      for (int i = 0; i < Split_Mesazhi.length; i++)
+            for (int j = 0; j < tekstiKontrollues.length; j++)
+                if (Split_Mesazhi[i].length() == tekstiKontrollues[j].length())
+                    list.add(Split_Mesazhi[i]);
+        String[] vargu = list.toArray(new String[0]);
+
+        int celesi = 0;
+        for (int i = 0; i < vargu.length; i++) {
+            celesi = kontrollo(tekstiKontrollues, vargu[i].toString());
+            if (celesi != -1) {
+                sms += Mesazhi(ciphertext, celesi);
+                break;
+            }
+        }
+        return sms;
+    }
+
+    public static String Mesazhi(String tekstiKoduar, int celsi) {
+        StringBuilder tekstiDekoduar = new StringBuilder(tekstiKoduar);
+        for (int i = 0; i < tekstiKoduar.length(); i++) {
+            if (tekstiKoduar.charAt(i) != ' ')
+                tekstiDekoduar.setCharAt(i, (char)((tekstiKoduar.charAt(i) - 'A' - celsi + 26) % 26 + 'A'));
+        }
+        return tekstiDekoduar.toString();
+    }
