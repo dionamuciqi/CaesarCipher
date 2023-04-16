@@ -55,3 +55,15 @@ public static String Dekriptimi(String ciphertext) {
         }
         return tekstiDekoduar.toString();
     }
+ public static int kontrollo(String[] _tekstiKontrollues, String fjala) {
+        int celesi_final = 0;
+        for (int i = 0; i < _tekstiKontrollues.length; i++)
+            if (_tekstiKontrollues[i].length() == fjala.length()) {
+                celesi_final = fjala.charAt(0) - _tekstiKontrollues[i].charAt(0);
+                if (_tekstiKontrollues[i].equals(Mesazhi(fjala, celesi_final)))
+
+                    return celesi_final;
+            }
+        return -1;
+    }
+}
